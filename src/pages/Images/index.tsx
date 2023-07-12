@@ -3,8 +3,8 @@ import { RouteComponentProps } from "@reach/router";
 
 interface Props extends RouteComponentProps {}
 
-const Predictions: React.FC<Props> = () => {
-  return <div className="p-4 bg-white">Predictions</div>;
+const Images: React.FC<Props> = () => {
+  return <div className="p-4 bg-white">Images</div>;
 };
 
-export default Predictions;
+export default Images;

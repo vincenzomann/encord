@@ -1,8 +1,8 @@
 import React from "react";
 import { UploadOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
-import { RouteComponentProps, Router, navigate } from "@reach/router";
-import Image from "./pages/Image";
+import { Link, RouteComponentProps, Router, navigate } from "@reach/router";
+import Images from "./pages/Images";
 import Predictions from "./pages/Predictions";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -28,7 +28,9 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Image", "1", "image", <UploadOutlined />, () => navigate("/image")),
+  getItem("Images", "1", "images", <UploadOutlined />, () =>
+    navigate("/images")
+  ),
   getItem("Predictions", "2", "predictions", <VideoCameraOutlined />, () =>
     navigate("/predictions")
   ),
@@ -46,7 +48,7 @@ const Dashboard: React.FC<Props> = () => {
         <Header className="p-0 bg-slate-100" />
         <Content className="mt-5 mx-4 pl-8">
           <Router>
-            <Image path="/image" default />
+            <Images path="/images" />
             <Predictions path="/predictions" />
           </Router>
         </Content>
