@@ -47,13 +47,12 @@ const Images: React.FC<Props> = () => {
 			title: 'Image',
 			dataIndex: 'src',
 			key: 'src',
-			render: (url) => <img alt={url} src={url} className='w-24' onClick={() => handleModal()} />
+			render: (src) => <img alt={src} src={src} className='w-24' onClick={() => handleModal()} />
 		},
 		{
 			title: 'Filename',
 			dataIndex: 'filename',
-			key: 'filename',
-			render: (text) => <a>{text}</a>,
+			key: 'filename'
 		},
 		{
 			title: 'Size (mb)',
