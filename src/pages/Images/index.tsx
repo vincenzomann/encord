@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "@reach/router";
 import { Button, Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import img from '../../assets/img_1.jpg';
+import PredictImageModal from '../../components/PredictImageModal';
 
 interface Props extends RouteComponentProps { }
 
@@ -13,40 +14,6 @@ interface DataType {
 	uploadTime: string;
 	src: string;
 }
-
-const columns: ColumnsType<DataType> = [
-	{
-		title: 'Image',
-		dataIndex: 'src',
-		key: 'src',
-		render: (url) => <img alt={url} src={url} />
-	},
-	{
-		title: 'Filename',
-		dataIndex: 'filename',
-		key: 'filename',
-		render: (text) => <a>{text}</a>,
-	},
-	{
-		title: 'Size (mb)',
-		dataIndex: 'fileSize',
-		key: 'fileSize',
-	},
-	{
-		title: 'Time of upload',
-		dataIndex: 'uploadTime',
-		key: 'uploadTime',
-	},
-	{
-		title: '',
-		key: 'action',
-		render: (_, record) => (
-			<Space size="middle">
-				<Button>Predict</Button>
-			</Space>
-		),
-	},
-];
 
 const data: DataType[] = [
 	{
@@ -73,7 +40,63 @@ const data: DataType[] = [
 ];
 
 const Images: React.FC<Props> = () => {
-	return <Table columns={columns} dataSource={data} />;
+	const [openModal, setOpenModal] = useState(false);
+
+	const columns: ColumnsType<DataType> = [
+		{
+			title: 'Image',
+			dataIndex: 'src',
+			key: 'src',
+			render: (url) => <img alt={url} src={url} className='w-24' onClick={() => handleModal()} />
+		},
+		{
+			title: 'Filename',
+			dataIndex: 'filename',
+			key: 'filename',
+			render: (text) => <a>{text}</a>,
+		},
+		{
+			title: 'Size (mb)',
+			dataIndex: 'fileSize',
+			key: 'fileSize',
+		},
+		{
+			title: 'Time of upload',
+			dataIndex: 'uploadTime',
+			key: 'uploadTime',
+		},
+		{
+			title: '',
+			key: 'action',
+			render: (_, record) => (
+				<Space size="middle">
+					<Button onClick={() => handleModal()}>Predict</Button>
+				</Space >
+			),
+		},
+	];
+
+	const handleModal = () => {
+		setOpenModal(true);
+	};
+
+	const onCreate = (values: any) => {
+		console.log('Received values of form: ', values);
+		setOpenModal(false);
+	};
+
+	return (
+		<>
+			<Table columns={columns} dataSource={data} />
+			<PredictImageModal
+				open={openModal}
+				onCreate={onCreate}
+				onCancel={() => {
+					setOpenModal(false);
+				}}
+			/>
+		</>
+	);
 };
 
 export default Images;
