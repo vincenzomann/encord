@@ -1,10 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Modal, theme } from 'antd';
-
-interface Values {
-	title: string;
-	description: string;
-}
+import { Modal } from 'antd';
 
 interface ViewPredictionModalProps {
 	open: boolean;
