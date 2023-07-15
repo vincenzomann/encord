@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { RouteComponentProps } from "@reach/router";
-import { Button, Space, Table, Upload } from 'antd';
+import { Button, Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import PredictImageModal from '../../components/PredictImageModal';
 import { Image, Prediction } from '../../types';
 import { data as mockImages } from '../../mock/images';
-import PrimaryButton from '../../components/PrimaryButton';
-import UploadImageModal from '../../components/UploadImageModal';
 import { useContextProvider } from '../../context/Context';
 import UploadImage from '../../components/UploadImage';
-import { UploadOutlined } from '@ant-design/icons';
 
 interface Props extends RouteComponentProps { }
 
 const Images: React.FC<Props> = () => {
-	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [openPredictModal, setOpenPredictModal] = useState(false);
 
 	const { predictions, setPredictions, images } = useContextProvider();
@@ -24,7 +20,7 @@ const Images: React.FC<Props> = () => {
 			title: 'Image',
 			dataIndex: 'base64',
 			key: 'base64',
-			render: (src) => <img src={src} className='w-24' onClick={() => handlePredictModal()} />
+			render: (base64) => <img src={base64} alt='img' className='w-24' onClick={() => handlePredictModal()} />
 		},
 		{
 			title: 'Filename',
@@ -51,14 +47,6 @@ const Images: React.FC<Props> = () => {
 			),
 		},
 	];
-
-	const handleUploadModal = () => {
-		setOpenUploadModal(true);
-	};
-
-	const onUpload = (values: any) => {
-		setOpenUploadModal(false);
-	};
 
 	const handlePredictModal = () => {
 		setOpenPredictModal(true);
@@ -88,13 +76,6 @@ const Images: React.FC<Props> = () => {
 		<>
 			<UploadImage />
 			<Table columns={columns} dataSource={[...mockImages, ...images]} />
-			<UploadImageModal
-				open={openUploadModal}
-				onSubmit={onUpload}
-				onCancel={() => {
-					setOpenUploadModal(false);
-				}}
-			/>
 			<PredictImageModal
 				open={openPredictModal}
 				onSubmit={onPredict}

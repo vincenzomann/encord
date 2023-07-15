@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Upload, UploadProps, message } from 'antd';
+import { Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useContextProvider } from '../../context/Context';
 import { Image } from '../../types';
@@ -16,7 +16,7 @@ export function getBase64(file: RcFile) {
 }
 
 const UploadImage: React.FC = () => {
-	const { images, setImages } = useContextProvider();
+	const { setImages } = useContextProvider();
 
 	return (
 		<Upload
