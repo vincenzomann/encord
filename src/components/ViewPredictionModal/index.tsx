@@ -24,7 +24,7 @@ const ViewPredictionModal: React.FC<ViewPredictionModalProps> = ({
 			title={data.title}
 		>
 			<div>
-				<img src={data.src} alt={data.title} />
+				<img src={data.base64} alt={data.title} />
 			</div>
 		</Modal>
 	);

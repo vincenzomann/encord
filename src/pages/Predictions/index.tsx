@@ -18,9 +18,9 @@ const Predictions: React.FC<Props> = () => {
 	const columns: ColumnsType<Prediction> = [
 		{
 			title: 'Prediction',
-			dataIndex: 'src',
-			key: 'src',
-			render: (src) => <img alt={src} src={src} className='w-24' onClick={() => handleModal(src)} />
+			dataIndex: 'base64',
+			key: 'base64',
+			render: (base64) => <img alt='img' src={base64} className='w-24' />
 		},
 		{
 			title: 'Title',

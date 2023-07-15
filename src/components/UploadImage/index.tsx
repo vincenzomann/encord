@@ -37,7 +37,6 @@ const UploadImage: React.FC = () => {
 								filename: info.file.name,
 								fileSize: info.file.size || 0,
 								uploadTime: new Date().toUTCString(),
-								src: '',
 								base64: b64
 							};
 							setImages(prev => [...prev, image]);

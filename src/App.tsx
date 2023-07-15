@@ -1,15 +1,12 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Router, navigate } from "@reach/router";
 import { Layout, Tabs, TabsProps } from "antd";
 import ContextProvider from './context/Context';
 import Images from "./pages/Images";
 import Predictions from "./pages/Predictions";
+import { Pathnames } from './types';
 
 const { Header, Content, Footer } = Layout;
-
-const onChange = (key: string) => {
-	navigate(`/${key}`);
-};
 
 const items: TabsProps["items"] = [
 	{
@@ -23,15 +20,35 @@ const items: TabsProps["items"] = [
 ];
 
 const Dashboard = () => {
+
+	const [currentTab, setCurrentTab] = useState<Pathnames>();
+
+	useEffect(() => {
+		switch (window.location.pathname) {
+			case `/${Pathnames.Predictions}`:
+				setCurrentTab(Pathnames.Predictions);
+				break;
+			case `/${Pathnames.Images}`:
+			default:
+				setCurrentTab(Pathnames.Images);
+				break;
+		}
+	}, [window.location.pathname]);
+
+	const onChange = (key: string) => {
+		setCurrentTab(key as Pathnames);
+		navigate(`/${key}`);
+	};
+
 	return (
 		<ContextProvider>
 			<Layout className="h-screen">
 				<Header className="p-0 bg-slate-100" />
 				<Content className="mt-5 mx-8">
-					<Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+					<Tabs activeKey={currentTab} items={items} onChange={onChange} />
 					<Router>
-						<Images path="/images" default />
-						<Predictions path="/predictions" />
+						<Images path={Pathnames.Images} default />
+						<Predictions path={Pathnames.Predictions} />
 					</Router>
 				</Content>
 				<Footer style={{ textAlign: "center" }}></Footer>
