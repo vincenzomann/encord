@@ -1,10 +1,11 @@
 import React from 'react';
 import { Modal } from 'antd';
+import { Prediction } from '../../types';
 
 interface ViewPredictionModalProps {
 	open: boolean;
 	onCancel: () => void;
-	data: any;
+	data: Prediction;
 }
 
 const ViewPredictionModal: React.FC<ViewPredictionModalProps> = ({
@@ -12,6 +13,7 @@ const ViewPredictionModal: React.FC<ViewPredictionModalProps> = ({
 	onCancel,
 	data
 }) => {
+	console.log('data', data);
 	return (
 		<Modal
 			open={open}
@@ -20,9 +22,11 @@ const ViewPredictionModal: React.FC<ViewPredictionModalProps> = ({
 				onCancel();
 			}}
 			okButtonProps={{ style: { 'display': 'none' } }}
+			title={data.title}
 		>
-			<p>Description: </p>
-			<img src={data} alt="" />
+			<div>
+				<img src={data.src} alt={data.title} />
+			</div>
 		</Modal>
 	);
 };

@@ -1,4 +1,4 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useState } from 'react';
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from 'react';
 import { Image, Prediction } from '../types';
 
 interface ContextType {
@@ -8,7 +8,14 @@ interface ContextType {
 	setPredictions: Dispatch<SetStateAction<Prediction[]>>;
 }
 
-const Context = createContext<ContextType | null>(null);
+const initialState = {
+	images: [],
+	setImages: () => [],
+	predictions: [],
+	setPredictions: () => [],
+};
+
+const Context = createContext<ContextType>(initialState);
 
 export function useContextProvider() {
 	return useContext(Context);

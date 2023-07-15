@@ -8,9 +8,18 @@ export interface Image {
 
 export interface Prediction {
 	id: string;
-	imageId: string;
+	// imageId: string;
 	title: string;
 	description: string;
+	predictions: PredictionResult[];
 	timestamp: string;
 	src: string;
+}
+
+export interface PredictionResult {
+	label: string;
+	score: string;
+	bbox: {
+		[key: string]: number;
+	};
 }

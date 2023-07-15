@@ -6,7 +6,7 @@ interface Values {
 	description: string;
 }
 
-interface PredictImageModalProps {
+interface UploadImageModalProps {
 	open: boolean;
 	onSubmit: (values: Values) => void;
 	onCancel: () => void;
@@ -14,7 +14,7 @@ interface PredictImageModalProps {
 
 const { useToken } = theme;
 
-const PredictImageModal: React.FC<PredictImageModalProps> = ({
+const UploadImageModal: React.FC<UploadImageModalProps> = ({
 	open,
 	onSubmit,
 	onCancel,
@@ -24,8 +24,8 @@ const PredictImageModal: React.FC<PredictImageModalProps> = ({
 	return (
 		<Modal
 			open={open}
-			title="Predict image"
-			okText="Submit"
+			title="Upload image"
+			okText="Upload"
 			okButtonProps={{ style: { 'backgroundColor': token.colorPrimary } }}
 			cancelText="Cancel"
 			onCancel={() => {
@@ -64,4 +64,4 @@ const PredictImageModal: React.FC<PredictImageModalProps> = ({
 	);
 };
 
-export default PredictImageModal;
+export default UploadImageModal;
