@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RouteComponentProps } from "@reach/router";
-import { Button, Space, Table } from 'antd';
+import { Button, Space, Table, Upload } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import PredictImageModal from '../../components/PredictImageModal';
 import { Image, Prediction } from '../../types';
@@ -8,6 +8,8 @@ import { data as mockImages } from '../../mock/images';
 import PrimaryButton from '../../components/PrimaryButton';
 import UploadImageModal from '../../components/UploadImageModal';
 import { useContextProvider } from '../../context/Context';
+import UploadImage from '../../components/UploadImage';
+import { UploadOutlined } from '@ant-design/icons';
 
 interface Props extends RouteComponentProps { }
 
@@ -15,14 +17,14 @@ const Images: React.FC<Props> = () => {
 	const [openUploadModal, setOpenUploadModal] = useState(false);
 	const [openPredictModal, setOpenPredictModal] = useState(false);
 
-	const { predictions, setPredictions } = useContextProvider();
+	const { predictions, setPredictions, images } = useContextProvider();
 
 	const columns: ColumnsType<Image> = [
 		{
 			title: 'Image',
-			dataIndex: 'src',
-			key: 'src',
-			render: (src) => <img alt={src} src={src} className='w-24' onClick={() => handlePredictModal()} />
+			dataIndex: 'base64',
+			key: 'base64',
+			render: (src) => <img src={src} className='w-24' onClick={() => handlePredictModal()} />
 		},
 		{
 			title: 'Filename',
@@ -30,7 +32,7 @@ const Images: React.FC<Props> = () => {
 			key: 'filename'
 		},
 		{
-			title: 'Size (mb)',
+			title: 'Size (bytes)',
 			dataIndex: 'fileSize',
 			key: 'fileSize',
 		},
@@ -55,7 +57,6 @@ const Images: React.FC<Props> = () => {
 	};
 
 	const onUpload = (values: any) => {
-		console.log('Received values of form: ', values);
 		setOpenUploadModal(false);
 	};
 
@@ -64,17 +65,16 @@ const Images: React.FC<Props> = () => {
 	};
 
 	const onPredict = async (values: any) => {
-		console.log('Received values of form: ', values);
 		try {
 			const res = await fetch('http://localhost:3001/predict').then(res => res.json()).then(data => data);
 			if (res && 'predictions' in res) {
 				const result: Prediction = {
-					id: `${predictions.length}`,
+					key: `${predictions.length}`,
 					title: values.title,
 					description: values.description || '',
 					predictions: res.predictions,
 					timestamp: new Date().toUTCString(),
-					src: mockImages[0].src
+					base64: mockImages[0].base64
 				};
 				setPredictions((prev: Prediction[]) => [...prev, result]);
 			}
@@ -86,8 +86,8 @@ const Images: React.FC<Props> = () => {
 
 	return (
 		<>
-			<PrimaryButton className='mb-4' onClick={handleUploadModal}>Upload image</PrimaryButton>
-			<Table columns={columns} dataSource={mockImages} />
+			<UploadImage />
+			<Table columns={columns} dataSource={[...mockImages, ...images]} />
 			<UploadImageModal
 				open={openUploadModal}
 				onSubmit={onUpload}

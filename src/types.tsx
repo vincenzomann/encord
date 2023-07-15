@@ -1,19 +1,21 @@
 export interface Image {
-	id: string;
+	key: string;
 	filename: string;
 	fileSize: number;
 	uploadTime: string;
-	src: string;
+	src?: string;
+	base64: string;
 }
 
 export interface Prediction {
-	id: string;
+	key: string;
 	// imageId: string;
 	title: string;
 	description: string;
 	predictions: PredictionResult[];
 	timestamp: string;
-	src: string;
+	src?: string;
+	base64: string;
 }
 
 export interface PredictionResult {

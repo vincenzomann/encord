@@ -1,33 +1,37 @@
 import { Prediction } from '../types';
 import img from '../assets/img_1.jpg';
 import results from './db.json';
+const orange = '../assets/orange.txt';
 
 export const data: Prediction[] = [
 	{
-		id: '1',
+		key: '1',
 		// imageId: '1',
 		title: 'title',
 		description: 'description',
 		predictions: results.predict.predictions,
 		timestamp: new Date().toUTCString(),
-		src: img
+		// src: img
+		base64: orange
 	},
 	{
-		id: '2',
+		key: '2',
 		// imageId: '1',
 		title: 'title',
 		description: 'description',
 		predictions: results.predict.predictions,
 		timestamp: new Date().toUTCString(),
-		src: img
+		// src: img
+		base64: orange
 	},
 	{
-		id: '3',
+		key: '3',
 		// imageId: '1',
 		title: 'title',
 		description: 'description',
 		predictions: results.predict.predictions,
 		timestamp: new Date().toUTCString(),
-		src: img
+		// src: img
+		base64: orange
 	},
 ];
