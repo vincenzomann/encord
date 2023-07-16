@@ -6,7 +6,7 @@ import Images from "./pages/Images";
 import Predictions from "./pages/Predictions";
 import { Pathnames } from './types';
 
-const { Header, Content, Footer } = Layout;
+const { Content } = Layout;
 
 const items: TabsProps["items"] = [
 	{
@@ -33,7 +33,7 @@ const Dashboard = () => {
 				setCurrentTab(Pathnames.Images);
 				break;
 		}
-	}, [window.location.pathname]);
+	}, []);
 
 	const onChange = (key: string) => {
 		setCurrentTab(key as Pathnames);
