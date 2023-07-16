@@ -43,7 +43,6 @@ const Dashboard = () => {
 	return (
 		<ContextProvider>
 			<Layout className="h-screen">
-				<Header className="p-0 bg-slate-100" />
 				<Content className="mt-5 mx-8">
 					<Tabs activeKey={currentTab} items={items} onChange={onChange} />
 					<Router>
@@ -51,7 +50,6 @@ const Dashboard = () => {
 						<Predictions path={Pathnames.Predictions} />
 					</Router>
 				</Content>
-				<Footer style={{ textAlign: "center" }}></Footer>
 			</Layout>
 		</ContextProvider>
 	);
