@@ -13,11 +13,6 @@ const ViewPredictionModal: React.FC<ViewPredictionModalProps> = ({
 	onCancel,
 	data
 }) => {
-
-	console.log(data.predictions);
-
-
-
 	return (
 		<Modal
 			open={open}

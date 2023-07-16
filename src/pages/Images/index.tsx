@@ -51,7 +51,6 @@ const Images: React.FC<Props> = () => {
 
 	const handlePredictModal = (record: Image) => {
 		setPredictImage(record);
-		console.log('record', record);
 		setOpenPredictModal(true);
 	};
 
@@ -60,7 +59,6 @@ const Images: React.FC<Props> = () => {
 			const res = await fetch('http://localhost:3001/predict').then(res => res.json()).then(data => data);
 			// res.reject();
 			if (res && 'predictions' in res && predictImage) {
-				console.log(res);
 				const result: Prediction = {
 					key: `${predictions.length}`,
 					imageKey: predictImage.key,
@@ -70,7 +68,6 @@ const Images: React.FC<Props> = () => {
 					timestamp: new Date().toUTCString(),
 					base64: predictImage.base64
 				};
-				console.log('pred', result);
 				setPredictions((prev: Prediction[]) => [...prev, result]);
 				setPredictImage(null);
 				message.success(`Prediction made. Please go to predictions tab.`);
