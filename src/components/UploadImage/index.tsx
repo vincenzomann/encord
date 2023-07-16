@@ -29,7 +29,6 @@ const UploadImage: React.FC = () => {
 			}}
 			onChange={(info) => {
 				if (info.file.originFileObj && info.file.status === 'done') {
-					// const b64 = await getBase64(info.file.originFileObj);
 					getBase64(info.file.originFileObj).then(b64 => {
 						if (typeof b64 === 'string') {
 							const image: Image = {

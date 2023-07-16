@@ -58,6 +58,7 @@ const Images: React.FC<Props> = () => {
 	const onPredict = async (values: any) => {
 		try {
 			const res = await fetch('http://localhost:3001/predict').then(res => res.json()).then(data => data);
+			// res.reject();
 			if (res && 'predictions' in res && predictImage) {
 				console.log(res);
 				const result: Prediction = {
